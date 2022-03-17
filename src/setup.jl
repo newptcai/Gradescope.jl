@@ -31,6 +31,7 @@ function create_setup(; julia_version::VersionNumber=v"1.7.2", packages::Vector{
 
         # join package names to be added via Pkg.add([])
         added_pkgs::String = join(map(pkg->"\"$pkg\"", named_pkgs), ", ")
+        registered_added_pkgs::String = isempty(named_pkgs) ? "" : "; Pkg.add([$added_pkgs])"
 
         # join URL package names to be added via Pkg.add([PackageSpec(...)])
         added_pkgs_urls::String = join(map(pkg->"PackageSpec(url=\"$pkg\")", url_pkgs), ", ")
@@ -52,7 +53,7 @@ function create_setup(; julia_version::VersionNumber=v"1.7.2", packages::Vector{
 
         # put it all together into the file contents
         filecontent *= """\n
-        julia -e 'using Pkg; Pkg.add([$added_pkgs])$unregistered_added_pkgs'
+        julia -e 'using Pkg $registered_added_pkgs $unregistered_added_pkgs'
         julia -e 'using Pkg; $pkg_precompile'
         julia -e '$using_pkgs'
         """
