@@ -13,12 +13,14 @@ export Results,
        addfile!,
        set_stdout_visibility,
        gradescope_output,
-       metadata
+       metadata,
+       AutoGrader
 
 include("gradescope_types.jl")
 include("zip.jl")
 include("setup.jl")
 include("output.jl")
+include("grader.jl")
 
 # Export enums
 for enum in [VisibilityMode, LeaderboardOrder], e in instances(enum)
