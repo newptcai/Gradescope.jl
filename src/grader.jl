@@ -20,7 +20,7 @@ function compare(ret, expect)
     return ret == expect
 end
 
-function test(expr, ret, expect, name)
+function test(expr, ret, expect, name, max_score=0.5)
     score = 0
     output = """Failed test:
     `$expr`.
@@ -36,10 +36,10 @@ function test(expr, ret, expect, name)
         output = "Pass"
     end
     t = TestCase(name=name,
-                    max_score=1, 
-                    score = score,
-                    output = output,
-                    extra_data = Dict("ret"=>ret, "expect"=>expect))
+                 max_score=max_score, 
+                 score = score,
+                 output = output,
+                 extra_data = Dict("ret"=>ret, "expect"=>expect))
     return t
 end
 
