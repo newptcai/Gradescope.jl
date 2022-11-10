@@ -32,7 +32,7 @@ function test(expr, ret, expect, name, max_score=0.5)
     $ret
     """
     if compare(ret, expect)
-        score = max_scorce
+        score = max_score
         output = "Pass"
     end
     t = TestCase(name=name,
