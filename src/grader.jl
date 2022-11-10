@@ -1,7 +1,7 @@
 export test, print_result
 
 function compare(ret::Real, expect::Real)
-    return isapprox(ret, expect; rtol=0.02)
+    return isapprox(ret, expect; rtol=0.05)
 end
 
 function compare((ret, expect))
@@ -32,7 +32,7 @@ function test(expr, ret, expect, name, max_score=0.5)
     $ret
     """
     if compare(ret, expect)
-        score = 1
+        score = max_scorce
         output = "Pass"
     end
     t = TestCase(name=name,
